@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Smile App</string>
+    <string name="settings_activity_name">Настройки</string>
+    <string name="about_activity_name">О программе</string>
+
+    <string name="setting_what_to_show">Что будем показывать:</string>
+    <string name="setting_show_photos">Семейные фотографии</string>
+    <string name="setting_show_text">Умные мысли</string>
+    <string name="setting_how_to_show">Как будем показывать:</string>
+    <string name="setting_in_order">По очереди</string>
+    <string name="setting_in_random">В произвольном порядке</string>
+
+    <string name="apply_settings_button">Применить</string>
+    <string name="random_button">Случайная картинка</string>
+    <string name="next_button">Следующая</string>
+    <string name="prev_button">Предыдущая</string>
+
+    <string name="settings_menu">Настройки</string>
+    <string name="about_menu">О программе</string>
+
+    <string name="photo_setting_answer">com.example.smileapp.PHOTO</string>
+    <string name="text_setting_answer">com.example.smileapp.TEXT</string>
+    <string name="random_setting_answer">com.example.smileapp.RANDOM</string>
+
+    <string name="about_version">Версия:</string>
+    <string name="about_version_value">2.0</string>
+    <string name="about_author">Автор:</string>
+    <string name="about_author_value">Фесенко Анна</string>
+    <string name="about_images">Количество картинок</string>
+    <string name="about_images_funny">Веселые:</string>
+    <string name="about_images_family">Фото:</string>
+    <string name="about_images_text">Умные мысли:</string>
+    <string name="about_features">В этой версии:</string>
+    <string name="about_features_value">  - Добавился режим \"Листать по порядку\"\n
+        - Добавилась информация о программе\n
+        - Добавился зелено-оранжевый стиль\n
+        - Я решила переквалифицироваться в Андройд-программисты :)</string>
+
+</resources>
