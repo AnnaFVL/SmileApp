@@ -6,81 +6,163 @@
     android:layout_height="match_parent"
     tools:context=".SettingActivity">
 
+    <!--Что будем показывать-->
     <TextView
         android:id="@+id/whatTextView"
+        style="@style/HeaderText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/setting_what_to_show"
-        style="@style/HeaderText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"/>
+        android:text="@string/setting_what_to_show"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
         android:id="@+id/photoCheckBox"
+        style="@style/ItemText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
         android:text="@string/setting_show_photos"
-        style="@style/ItemText"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/whatTextView" />
 
     <CheckBox
         android:id="@+id/textCheckBox"
+        style="@style/ItemText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/setting_show_text"
-        style="@style/ItemText"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/photoCheckBox" />
 
     <TextView
-        android:id="@+id/howTextView"
+        android:id="@+id/goodWordsTextView"
+        style="@style/ItemText.Orange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/setting_how_to_show"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/setting_good_words"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/textCheckBox" />
+
+    <CheckBox
+        android:id="@+id/textFatherCheckBox"
+        style="@style/ItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/setting_show_text_father"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/goodWordsTextView" />
+
+    <CheckBox
+        android:id="@+id/textMotherCheckBox"
+        style="@style/ItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/setting_show_text_mother"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/goodWordsTextView" />
+
+    <CheckBox
+        android:id="@+id/textIraCheckBox"
+        style="@style/ItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/setting_show_text_Ira"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/textFatherCheckBox" />
+
+    <CheckBox
+        android:id="@+id/textIlyaCheckBox"
+        style="@style/ItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/setting_show_text_Ilya"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/textFatherCheckBox" />
+
+    <CheckBox
+        android:id="@+id/textAnnaCheckBox"
+        style="@style/ItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/setting_show_text_Anna"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/textIraCheckBox" />
+
+    <!--Как будем показывать-->
+    <TextView
+        android:id="@+id/howTextView"
         style="@style/HeaderText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/setting_how_to_show"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textCheckBox"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="10dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textAnnaCheckBox" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/howTextView"
-        android:layout_marginTop="25dp">
+        app:layout_constraintTop_toBottomOf="@+id/howTextView">
 
         <RadioButton
             android:id="@+id/inOrderRadioButton"
+            style="@style/ItemText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/ItemText"
             android:text="@string/setting_in_order" />
 
         <RadioButton
             android:id="@+id/inRandomRadioButton"
+            style="@style/ItemText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/ItemText"
             android:text="@string/setting_in_random" />
 
     </RadioGroup>
+
+    <!--Напоминание-->
+    <TextView
+        android:id="@+id/notificationTextView"
+        style="@style/HeaderText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/setting_if_notify"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+
+    <Switch
+        android:id="@+id/notifySwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/setting_notify_time"
+        style="@style/ItemText"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/notificationTextView" />
 
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:text="@string/apply_settings_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/notifySwitch" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -88,5 +170,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="25dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="205dp" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

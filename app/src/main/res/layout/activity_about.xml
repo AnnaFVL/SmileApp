@@ -48,17 +48,20 @@
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/authorTextView" />
 
+
+    <!--Количество картинок-->
     <TextView
         android:id="@+id/imagesTextView"
         style="@style/HeaderText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="@string/about_images"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/authorTextView" />
 
+    <!--Количество картинок: Солбец с названиями-->
     <TextView
         android:id="@+id/imagesFunnyTextView"
         style="@style/ItemText.Orange"
@@ -93,6 +96,73 @@
         app:layout_constraintTop_toBottomOf="@+id/imagesPhotoTextView" />
 
     <TextView
+        android:id="@+id/imagesGoodWordsTextView"
+        style="@style/ItemText.Orange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/about_images_good_words"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagesTextTextView" />
+
+    <TextView
+        android:id="@+id/imagesTextFatherTextView"
+        style="@style/ItemText.OrangeBright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/about_images_text_father"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagesGoodWordsTextView" />
+
+    <TextView
+        android:id="@+id/imagesTextMotherTextView"
+        style="@style/ItemText.OrangeBright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/about_images_text_mother"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagesTextFatherTextView" />
+
+    <TextView
+        android:id="@+id/imagesTextIraTextView"
+        style="@style/ItemText.OrangeBright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/about_images_text_Ira"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagesTextMotherTextView" />
+
+    <TextView
+        android:id="@+id/imagesTextIlyaTextView"
+        style="@style/ItemText.OrangeBright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/about_images_text_Ilya"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagesTextIraTextView" />
+
+    <TextView
+        android:id="@+id/imagesTextAnnaTextView"
+        style="@style/ItemText.OrangeBright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/about_images_text_Anna"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagesTextIlyaTextView" />
+
+    <!--Количество картинок: Солбец со значениями-->
+    <TextView
         android:id="@+id/imagesFunnyValueTextView"
         style="@style/ItemText"
         android:layout_width="wrap_content"
@@ -118,20 +188,71 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Количество умных мыслей"
+        android:text="Количество мотиваций"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/imagesPhotoValueTextView" />
 
+    <TextView
+        android:id="@+id/imagesTextValueFatherTextView"
+        style="@style/ItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Для папы"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/imagesGoodWordsTextView" />
+
+    <TextView
+        android:id="@+id/imagesTextValueMotherTextView"
+        style="@style/ItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Для мамы"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/imagesTextValueFatherTextView" />
+
+    <TextView
+        android:id="@+id/imagesTextValueIraTextView"
+        style="@style/ItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Для Иры"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/imagesTextValueMotherTextView" />
+
+    <TextView
+        android:id="@+id/imagesTextValueIlyaTextView"
+        style="@style/ItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Для Ильи"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/imagesTextValueIraTextView" />
+
+    <TextView
+        android:id="@+id/imagesTextValueAnnaTextView"
+        style="@style/ItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Для Ани"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/imagesTextValueIlyaTextView" />
+
+    <!--Описание текущей версии-->
     <TextView
         android:id="@+id/featuresTextView"
         style="@style/HeaderText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="@string/about_features"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagesTextTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/imagesTextAnnaTextView" />
 
     <TextView
         android:id="@+id/featuresValueTextView"

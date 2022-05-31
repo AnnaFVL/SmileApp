@@ -26,4 +26,8 @@
     <style name="ItemText.Orange">
         <item name="android:textColor">@color/dark_orange</item>
     </style>
+
+    <style name="ItemText.OrangeBright">
+        <item name="android:textColor">@color/orange</item>
+    </style>
 </resources>
