@@ -18,7 +18,7 @@
     <string name="setting_in_order">По очереди</string>
     <string name="setting_in_random">В произвольном порядке</string>
     <string name="setting_if_notify">Показывать напоминания:</string>
-    <string name="setting_notify_time">Каждый день в 19:00</string>
+    <string name="setting_notify_time">Каждый день</string>
 
     <!--App: Buttons-->
     <string name="apply_settings_button">Применить</string>
@@ -47,7 +47,7 @@
     <string name="about_images_text_Anna">Для Ани:</string>
     <string name="about_features">В этой версии:</string>
     <string name="about_features_value">1) \"Умные мысли\" разделились по категориям\n
-    2) Добавлены нотификации в 19:00</string>
+    2) Добавлены нотификации</string>
 
 
     <!--Utils: Channel for notification-->
@@ -65,6 +65,7 @@
     <string name="anna">textAnnaSetting</string>
     <string name="random">randomSetting</string>
     <string name="notification">notificationSetting</string>
+    <string name="time">timeSetting</string>
 
 
     <!--Utils: Integers-->

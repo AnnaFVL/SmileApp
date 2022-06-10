@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings.Secure.getString
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -19,6 +20,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import java.util.*
+import kotlin.time.Duration.Companion.hours
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     var textAnnaSetting : Boolean? = true       // показывать ли текст для Ани
     var randomSetting : Boolean? = false        // листать ли картинки рендомом
     var notifySetting : Boolean? = false        // показывать ли нотификации
+    var timeSetting : Int = 0                   // время для напоминаний
     ////
     // Списки картинок:
     ////
@@ -48,7 +51,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var textAnnaList: List<Int>        // список идентификаторов текстов для Ани (R.id.<...>)
     lateinit var selectedImageList: List<Int>   // текущий список всех картинок, соответсвующий настройкам
     var currentImageID = 0                      // ID текущей картинки
-    var selectedID = 0                          // ID картинки для нотификации
+    //var selectedID = 0                          // ID картинки для нотификации
     ////
     // Элементы UI:
     ////
@@ -72,6 +75,7 @@ class MainActivity : AppCompatActivity() {
         textAnnaSetting = sharedPreferences.getBoolean(getString(R.string.anna), true)
         randomSetting = sharedPreferences.getBoolean(getString(R.string.random), false)
         notifySetting = sharedPreferences.getBoolean(getString(R.string.notification), false)
+        timeSetting = sharedPreferences.getInt(getString(R.string.time), 0)
 
         // Создаем списки в соответсвии с настройками
         initialListMap()
@@ -91,7 +95,10 @@ class MainActivity : AppCompatActivity() {
         // Устанавливаем, какие кнопки отображать
         updateButtonsVisibility()
 
-        // Если запустились из Notification
+
+        ////
+        // Если запустились из Notification:
+        ////
         val startFromNotificationIntent = intent
         var extra1 = 0
         extra1 = startFromNotificationIntent.getIntExtra("selectedID", 0)
@@ -102,16 +109,21 @@ class MainActivity : AppCompatActivity() {
             //myToast.show()
             if (extra1 >= selectedImageList.size) extra1 = 0
         }
+        // выставляем картинку, как в нотификации
         imageSource = selectedImageList[extra1]
         smileImageView.setImageResource(imageSource)
+        // присваиваем в текущий ID, чтобы листалось по порядку
+        currentImageID = extra1
 
-        // Запускаем нотификацию на 19:00
+
+        ////
+        // Запускаем нотификацию на указанное время:
+        ////
         if (notifySetting == true) {
             setAlarmReceiver()
         } else {
             cancelAlarmReceiver()
         }
-
 
     }
 
@@ -120,12 +132,16 @@ class MainActivity : AppCompatActivity() {
     ////
 
     private fun setAlarmReceiver() {
-
+        val context = this
+        val scheduleAR : ScheduleAlarmReceiver = ScheduleAlarmReceiver()
+        scheduleAR.schedule(context)
+/*
         val calendar: Calendar = Calendar.getInstance()
-        calendar.timeInMillis = System.currentTimeMillis()
-        calendar.set(Calendar.HOUR_OF_DAY, 19)
+        //calendar.timeInMillis = System.currentTimeMillis()
+        calendar.set(Calendar.HOUR_OF_DAY, timeSetting)
         calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND, 1)
+
 
         //val intervalInMs = 3000
         val context = this
@@ -134,9 +150,14 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(context, Receiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         Log.d("MainActivity", "Create: " + Date().toString())
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
         //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
 
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+        //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
+        //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+        //am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + timeInterval, pi);
+
+ */
     }
 
     private fun cancelAlarmReceiver() {
@@ -212,6 +233,7 @@ class MainActivity : AppCompatActivity() {
             textAnnaSetting = data?.getBooleanExtra(getString(R.string.anna), true)
             randomSetting = data?.getBooleanExtra(getString(R.string.random), false)
             notifySetting = data?.getBooleanExtra(getString(R.string.notification), false)
+            timeSetting = data?.getIntExtra(getString(R.string.time), 0)!!
 
             // Обновляем список изображений:
             updateSelectedImageList()
@@ -222,8 +244,13 @@ class MainActivity : AppCompatActivity() {
             // Устанавливаем, какие кнопки отображать
             updateButtonsVisibility()
 
+            ////
+            // Запускаем нотификацию на указанное время:
+            ////
             if (notifySetting == true) {
                 setAlarmReceiver()
+            } else {
+                cancelAlarmReceiver()
             }
 
         }
@@ -271,6 +298,7 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra(getString(R.string.anna), textAnnaSetting)
                 intent.putExtra(getString(R.string.random), randomSetting)
                 intent.putExtra(getString(R.string.notification), notifySetting)
+                intent.putExtra(getString(R.string.time), timeSetting)
                 startActivityForResult(intent, R.integer.requestID)
             }
             R.id.action_about -> {
@@ -322,15 +350,20 @@ class MainActivity : AppCompatActivity() {
         smileImageView.setImageResource(imageSource)
     }
 
+
     ////
     // Receiver для нотификаций
     ////
     class Receiver : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            Log.d("MainActivity", "Received: " + Date().toString())
+            Log.d("MainActivity", "Received: " + Date().time.hours)
+            //val hour : Int = getTimeFromSharedPref(context) //(System.currentTimeMillis() / 1000 / 60).toInt()
 
             registerNotificationChannel(context)
             showNotification(context)
+            val scheduleAR : ScheduleAlarmReceiver = ScheduleAlarmReceiver()
+            scheduleAR.schedule(context)
+            //setAlarmReceiver(hour, context)
 
         }
 
@@ -381,6 +414,63 @@ class MainActivity : AppCompatActivity() {
 
             NotificationManagerCompat.from(context!!).notify(R.integer.notificationID, builder.build())
         }
+/*
+        private fun setAlarmReceiver(hour: Int, context: Context?) {
+
+            val calendar: Calendar = Calendar.getInstance()
+            //calendar.timeInMillis = System.currentTimeMillis()
+            calendar.set(Calendar.HOUR_OF_DAY, hour)
+            calendar.set(Calendar.MINUTE, 0)
+            calendar.set(Calendar.SECOND, 1)
+
+            //val intervalInMs = 3000
+            val alarmManager = context!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+            val intent = Intent(context, Receiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            Log.d("MainActivity", "Create: " + Date().toString())
+            //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis + 1000*60*60*24, pendingIntent)
+
+            //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
+            //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+            //am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + timeInterval, pi);
+        }
+
+        private fun getTimeFromSharedPref(context: Context?) : Int {
+            val sharedPreferences = context?.getSharedPreferences(context.getString(R.string.file_name), Context.MODE_PRIVATE)
+            val timeSetting : Int = sharedPreferences?.getInt(context.getString(R.string.time), 0)!!
+            return timeSetting
+        }*/
+
     }
+
+    class ScheduleAlarmReceiver {
+        var notifySetting : Boolean = false
+        var timeSetting : Int = 0
+
+        public fun schedule(context: Context?) {
+            // Считываем настройки
+            val sharedPreferences = context?.getSharedPreferences(context.getString(R.string.file_name), Context.MODE_PRIVATE)
+            notifySetting = sharedPreferences?.getBoolean(context.getString(R.string.notification), false)!!
+            timeSetting = sharedPreferences?.getInt(context.getString(R.string.time), 0)!!
+
+            if (notifySetting) {
+                val calendar: Calendar = Calendar.getInstance()
+                if (calendar.time.hours >= timeSetting) calendar.add(Calendar.DATE, 1)
+                calendar.set(Calendar.HOUR_OF_DAY, timeSetting)
+                calendar.set(Calendar.MINUTE, 0)
+                calendar.set(Calendar.SECOND, 1)
+
+                val alarmManager = context!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+                val intent = Intent(context, Receiver::class.java)
+                val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                Log.d("MainActivity", "Create: " + Date().toString())
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+            }
+        }
+    }
+
 
 }

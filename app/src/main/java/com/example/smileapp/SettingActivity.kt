@@ -3,9 +3,13 @@ package com.example.smileapp
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.icu.number.IntegerWidth
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputFilter
+import android.text.Spanned
 import android.widget.*
+import java.lang.NumberFormatException
 
 class SettingActivity : AppCompatActivity() {
 
@@ -21,6 +25,7 @@ class SettingActivity : AppCompatActivity() {
     var textAnnaSetting : Boolean? = false      // показывать ли текст для Ани
     var randomSetting : Boolean? = false        // листать ли картинки рендомом
     var notificationSetting : Boolean? = false  // показывать ли нотификации
+    var timeSetting : Int? = 0                  // время нотификации
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +41,7 @@ class SettingActivity : AppCompatActivity() {
         val extra25 = intent.getBooleanExtra(getString(R.string.anna), false)
         val extra3 = intent.getBooleanExtra(getString(R.string.random), false)
         val extra4 = intent.getBooleanExtra(getString(R.string.notification), false)
+        val extra5 = intent.getIntExtra(getString(R.string.time), 0)
         //Toast.makeText(applicationContext, "Values: " + extra1.toString() + "/" + extra2.toString(), Toast.LENGTH_LONG).show()
 
         val photoCheckBox = findViewById<CheckBox>(R.id.photoCheckBox)
@@ -46,6 +52,9 @@ class SettingActivity : AppCompatActivity() {
         val ilyaCheckBox = findViewById<CheckBox>(R.id.textIlyaCheckBox)
         val annaCheckBox = findViewById<CheckBox>(R.id.textAnnaCheckBox)
         val notificationSwitch = findViewById<Switch>(R.id.notifySwitch)
+        //val timeTextView1 = findViewById<TextView>(R.id.timeTextView1)
+        //val timeTextView2 = findViewById<TextView>(R.id.timeTextView2)
+        val timeEditText = findViewById<EditText>(R.id.timeEditText)
 
         if (extra1) {
             photoCheckBox.isChecked = true
@@ -78,6 +87,13 @@ class SettingActivity : AppCompatActivity() {
         if (extra4) {
             notificationSwitch.isChecked = true
             notificationSetting = true
+            enableTimeEditText(true)
+        } else {
+            enableTimeEditText(false)
+        }
+        if (extra5 in 0 until 24) {
+            timeSetting = extra5
+            timeEditText.setText(extra5.toString())
         }
 
 
@@ -92,6 +108,10 @@ class SettingActivity : AppCompatActivity() {
             inOrderRadioButton.isChecked = true
             randomSetting = false
         }
+
+        // Фильтр для ввода часов
+        val inputFilerArray = Array<InputFilter>(1) {InputFilterMinMax(0,24)}
+        timeEditText.filters = inputFilerArray
 
         // Устанавливаем стрелку Back в Action Bar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -111,6 +131,7 @@ class SettingActivity : AppCompatActivity() {
             textAnnaSetting = annaCheckBox.isChecked
             randomSetting = isRandom
             notificationSetting = notificationSwitch.isChecked
+            timeSetting = Integer.parseInt(timeEditText.text.toString())
 
             // Сохранение настроек
             val sharedPreferences = this.getSharedPreferences("smileAppSharedPreferences", Context.MODE_PRIVATE)
@@ -124,6 +145,7 @@ class SettingActivity : AppCompatActivity() {
             editor.putBoolean(getString(R.string.anna), annaCheckBox.isChecked)
             editor.putBoolean(getString(R.string.random), isRandom)
             editor.putBoolean(getString(R.string.notification), notificationSwitch.isChecked)
+            editor.putInt(getString(R.string.time), timeSetting!!)
             editor.apply()
 
             val answerIntent = Intent()
@@ -136,9 +158,59 @@ class SettingActivity : AppCompatActivity() {
             answerIntent.putExtra(getString(R.string.anna), textAnnaSetting)
             answerIntent.putExtra(getString(R.string.random), randomSetting)
             answerIntent.putExtra(getString(R.string.notification), notificationSetting)
+            answerIntent.putExtra(getString(R.string.time), timeSetting)
             setResult(RESULT_OK, answerIntent)
             finish()
         }
 
+        // Управляем доступностью установки времени напоминаний
+        notificationSwitch.setOnClickListener{
+            if (notificationSwitch.isChecked) {
+                enableTimeEditText(true)
+            } else {
+                enableTimeEditText(false)
+            }
+        }
+
     }
+
+    private fun enableTimeEditText(enabled: Boolean) {
+        val timeTextView1 = findViewById<TextView>(R.id.timeTextView1)
+        val timeTextView2 = findViewById<TextView>(R.id.timeTextView2)
+        val timeEditText = findViewById<EditText>(R.id.timeEditText)
+
+        if (enabled) {
+            timeEditText.isEnabled = true
+            timeTextView1.isEnabled = true
+            timeTextView2.isEnabled = true
+        } else {
+            timeEditText.isEnabled = false
+            timeTextView1.isEnabled = false
+            timeTextView2.isEnabled = false
+        }
+    }
+}
+
+class InputFilterMinMax (minBorder: Int, maxBorder: Int) : InputFilter {
+    private val min = minBorder
+    private val max = maxBorder
+
+    override fun filter(
+        source: CharSequence?,
+        start: Int,
+        end: Int,
+        dest: Spanned?,
+        dstart: Int,
+        dend: Int
+    ): CharSequence {
+        try {
+            val inputString = dest?.subSequence(0, dstart).toString() + source + dest?.subSequence(dend, dest.length)
+            val inputInt = inputString.toInt()
+            if (inputInt in min until max) {
+                return source!!
+            }
+        } catch (nfe: NumberFormatException) {}
+        return ""
+    }
+
 }

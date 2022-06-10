@@ -71,8 +71,8 @@
         style="@style/ItemText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/setting_show_text_Ira"
         android:layout_marginStart="16dp"
+        android:text="@string/setting_show_text_Ira"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/textFatherCheckBox" />
 
@@ -90,8 +90,8 @@
         style="@style/ItemText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/setting_show_text_Anna"
         android:layout_marginStart="16dp"
+        android:text="@string/setting_show_text_Anna"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/textIraCheckBox" />
 
@@ -145,13 +145,49 @@
 
     <Switch
         android:id="@+id/notifySwitch"
+        style="@style/ItemText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/setting_notify_time"
-        style="@style/ItemText"
         android:layout_marginTop="8dp"
+        android:text="@string/setting_notify_time"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/notificationTextView" />
+
+    <TextView
+        android:id="@+id/timeTextView1"
+        style="@style/ItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="в"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@+id/notifySwitch"
+        app:layout_constraintBottom_toBottomOf="@+id/notifySwitch"
+        app:layout_constraintTop_toTopOf="@+id/notifySwitch"
+         />
+
+    <EditText
+        android:id="@+id/timeEditText"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:inputType="number"
+        android:maxLength="2"
+        app:layout_constraintStart_toEndOf="@+id/timeTextView1"
+        app:layout_constraintBottom_toBottomOf="@+id/timeTextView1"
+        app:layout_constraintTop_toTopOf="@+id/timeTextView1"
+        />
+
+    <TextView
+        android:id="@+id/timeTextView2"
+        style="@style/ItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="часов"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@+id/timeEditText"
+        app:layout_constraintBottom_toBottomOf="@+id/notifySwitch"
+        app:layout_constraintTop_toTopOf="@+id/notifySwitch"
+        />
 
     <Button
         android:id="@+id/saveButton"
@@ -177,7 +213,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="205dp" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
