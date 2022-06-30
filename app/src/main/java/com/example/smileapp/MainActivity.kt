@@ -189,7 +189,8 @@ class MainActivity : AppCompatActivity() {
         funnyList = listOf(R.drawable.funny1, R.drawable.funny2, R.drawable.funny3, R.drawable.funny4, R.drawable.funny5,
             R.drawable.funny6, R.drawable.funny7, R.drawable.funny8, R.drawable.funny9, R.drawable.funny10,
             R.drawable.funny11, R.drawable.funny12, R.drawable.funny13, R.drawable.funny14, R.drawable.funny15,
-            R.drawable.funny16, R.drawable.funny17)
+            R.drawable.funny16, R.drawable.funny17, R.drawable.funny18, R.drawable.funny19, R.drawable.funny20,
+            R.drawable.funny21)
         // 5, 13, 20, 26 - убрала
         photoList = listOf(R.drawable.family1, R.drawable.family2, R.drawable.family3, R.drawable.family4,
             R.drawable.family6, R.drawable.family7, R.drawable.family8, R.drawable.family9,
@@ -204,7 +205,7 @@ class MainActivity : AppCompatActivity() {
             R.drawable.family50, R.drawable.family51, R.drawable.family52, R.drawable.family53, R.drawable.family54,
             R.drawable.family55, R.drawable.family56, R.drawable.family57, R.drawable.family58)
         textList = listOf(R.drawable.text1, R.drawable.text2, R.drawable.text3, R.drawable.text4, R.drawable.text5,
-            R.drawable.text6, R.drawable.text26)
+            R.drawable.text6, R.drawable.text26, R.drawable.text33, R.drawable.text34, R.drawable.text35)
         textFatherList = listOf(R.drawable.text8, R.drawable.text11, R.drawable.text14, R.drawable.text19,
             R.drawable.text29, R.drawable.text31)
         textMotherList = listOf(R.drawable.text7, R.drawable.text11, R.drawable.text13, R.drawable.text21,
@@ -213,7 +214,8 @@ class MainActivity : AppCompatActivity() {
             R.drawable.text30)
         textIlyaList = listOf(R.drawable.text10, R.drawable.text12, R.drawable.text20, R.drawable.text23)
         textAnnaList = listOf(R.drawable.text15, R.drawable.text16, R.drawable.text17, R.drawable.text18,
-            R.drawable.text24, R.drawable.text27, R.drawable.text32)
+            R.drawable.text24, R.drawable.text27, R.drawable.text32, R.drawable.text36, R.drawable.text37,
+            R.drawable.text38)
 
     }
 
@@ -388,7 +390,8 @@ class MainActivity : AppCompatActivity() {
             funnyList = listOf(R.drawable.funny1, R.drawable.funny2, R.drawable.funny3, R.drawable.funny4, R.drawable.funny5,
                 R.drawable.funny6, R.drawable.funny7, R.drawable.funny8, R.drawable.funny9, R.drawable.funny10,
                 R.drawable.funny11, R.drawable.funny12, R.drawable.funny13, R.drawable.funny14, R.drawable.funny15,
-                R.drawable.funny16, R.drawable.funny17)
+                R.drawable.funny16, R.drawable.funny17, R.drawable.funny18, R.drawable.funny19, R.drawable.funny20,
+                R.drawable.funny21)
 
             val intent = Intent(context, MainActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

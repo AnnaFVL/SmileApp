@@ -32,7 +32,7 @@
 
     <!--About Activity: TextViews-->
     <string name="about_version">Версия:</string>
-    <string name="about_version_value">3.0</string>
+    <string name="about_version_value">3.1</string>
     <string name="about_author">Автор:</string>
     <string name="about_author_value">Фесенко Анна</string>
     <string name="about_images">Количество картинок</string>
@@ -46,8 +46,7 @@
     <string name="about_images_text_Ilya">Для Ильи:</string>
     <string name="about_images_text_Anna">Для Ани:</string>
     <string name="about_features">В этой версии:</string>
-    <string name="about_features_value">1) \"Умные мысли\" разделились по категориям\n
-    2) Добавлены нотификации</string>
+    <string name="about_features_value">Добавила немного картинок</string>
 
 
     <!--Utils: Channel for notification-->
